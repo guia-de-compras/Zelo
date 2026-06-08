@@ -1,0 +1,233 @@
+/* Cores do Tema Escuro */
+:root {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --accent-color: #ff5722; /* Laranja vibrante para preços */
+    --badge-bg: #d32f2f;   /* Vermelho para descontos */
+    --border-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header */
+header {
+    background-color: #1a1a1a;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.search-bar {
+    flex: 1;
+    max-width: 600px;
+    display: flex;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+}
+
+.search-bar button {
+    padding: 0 15px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+/* Estilo dos ícones das redes sociais */
+.social-media {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-media a {
+    color: var(--text-color);
+    font-size: 22px;
+    transition: color 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.social-media a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* Product Card */
+.product-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    border: 1px solid var(--border-color);
+    position: relative;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Proporção 3:4 mantida para corrigir o erro do iPad Mini */
+.product-image {
+    width: 100%;
+    height: auto; 
+    aspect-ratio: 3 / 4; 
+    object-fit: cover;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--badge-bg);
+    color: white;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-title {
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+/* Estilo da Descrição */
+.product-description {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Estilo do Contador de Cliques */
+.product-clicks {
+    font-size: 11px;
+    color: #4caf50; 
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.price-row {
+    margin-bottom: 8px;
+}
+
+.old-price {
+    color: var(--text-muted);
+    text-decoration: line-through;
+    font-size: 12px;
+}
+
+.current-price {
+    color: var(--accent-color);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pix-price {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* NOVO: Estilo Clean do Rodapé */
+footer {
+    background-color: #1a1a1a;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 40px;
+    text-align: center;
+}
+
+.footer-content p {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Responsividade Avançada (Celulares e iPads) */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    /* Mantém tudo em uma única linha reta no mobile */
+    .header-content {
+        gap: 10px;
+    }
+    
+    .logo {
+        font-size: 20px; /* Reduz sutilmente para ganhar espaço */
+    }
+
+    .search-bar input {
+        padding: 8px;
+    }
+
+    .social-media {
+        gap: 10px;
+    }
+
+    .social-media a {
+        font-size: 18px; /* Ajusta o tamanho para harmonizar com a busca */
+    }
+}
