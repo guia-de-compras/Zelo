@@ -1,5 +1,5 @@
 // VARIÁVEL IMPORTANTE: Cole aqui o link da sua planilha JSON
-const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbxI0WblU04OuHMpNWQIvEYLgQc9u5Y0x7X6roIGY5mim8-jF3P22_KajZ4T22WxE47b/exec';
+const SHEET_JSON_URL = 'https://zelo-api-proxy.tryatsm.workers.dev/';
 
 let allProducts = []; // Para guardar todos os produtos carregados
 
