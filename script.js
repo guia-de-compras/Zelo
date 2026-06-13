@@ -3,6 +3,32 @@ const SHEET_JSON_URL = 'https://zelo-api-proxy.tryatsm.workers.dev/';
 
 let allProducts = []; // Para guardar todos os produtos carregados
 
+// ========== NOVO: Sistema de clique único por usuário ==========
+const STORAGE_KEY = 'zelo_clicados';
+
+function getProdutosClicados() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return [];
+    try {
+        return JSON.parse(stored);
+    } catch(e) {
+        return [];
+    }
+}
+
+function adicionarProdutoClicado(id) {
+    const clicados = getProdutosClicados();
+    if (!clicados.includes(id)) {
+        clicados.push(id);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(clicados));
+    }
+}
+
+function produtoJaClicado(id) {
+    return getProdutosClicados().includes(id);
+}
+// ========== Fim do sistema de clique único ==========
+
 // Função para buscar os produtos da planilha
 async function loadProducts() {
     try {
@@ -33,10 +59,20 @@ async function loadProducts() {
     }
 }
 
-// Função executada quando o usuário clica no produto
+// Função executada quando o usuário clica no produto (com controle de clique único)
 function realizarClique(id, linkAfiliado) {
     // Abre o link de afiliado imediatamente em outra aba para o cliente não esperar
     window.open(linkAfiliado, '_blank');
+
+    // Verifica se o usuário já clicou neste produto antes
+    if (produtoJaClicado(id)) {
+        // Já clicou: apenas abre o link, sem contar novo clique
+        console.log(`Produto ${id} já foi clicado por este usuário. Clique não contabilizado.`);
+        return;
+    }
+
+    // Primeiro clique: contabiliza
+    adicionarProdutoClicado(id);
 
     // Envia em segundo plano o aviso para a sua API registrar o clique na planilha
     fetch(`${SHEET_JSON_URL}?id=${id}`, { method: 'POST', mode: 'no-cors' })
